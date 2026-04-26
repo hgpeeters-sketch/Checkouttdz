@@ -7,108 +7,140 @@
 *  @author    Peter Sliacky (Zelarg)
 *  @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
 *}
-
+{if $tc_config->google_maps_api_key}
 {literal}
 <script async
-        src="https://maps.googleapis.com/maps/api/js?key={/literal}{$tc_config->google_maps_api_key}{literal}&libraries=places&callback=googlePlacesScriptLoadCallback">
+        src="https://maps.googleapis.com/maps/api/js?key={/literal}{$tc_config->google_maps_api_key}{literal}&libraries=places&callback=googlePlacesScriptLoadCallback&loading=async">
 </script>
 <script>
-    function tc_reInitGooglePlaces() {
-        googlePlacesScriptLoadCallback();
-    }
-    var tc_autocomplete = {}
+    var tc_autocomplete = {};
     var debug_google_places = 0;
-    function googlePlacesScriptLoadCallback() {
-        if (debug_google_places == 1) {
-            console.log('googlePlacesScriptLoadCallback');
-        }
-        addEventListener('DOMContentLoaded', (event) => {
-            /* global google */
-            if (google) {
-                for (const tc_addr_type of ['invoice', 'delivery']) {
-                    // console.log('Attempt to bind ' + tc_addr_type, document.querySelector(`[data-address-type=${tc_addr_type}] [name=address1]`))
-                    tc_autocomplete[tc_addr_type] = new google.maps.places.Autocomplete(document.querySelector(`[data-address-type=${tc_addr_type}] [name=address1]`), {
-                        fields: ['address_components'],
-                        strictBounds: false,
-                        types: ['address'],
-                        // TODO: component restriction based on selected country
-                        // TODO: what about US states?
-                        // componentRestrictions: { country: ['sk'] },
-                    });
-                    tc_autocomplete[tc_addr_type].addListener('place_changed', () => googlePlaceChanged(tc_addr_type, tc_autocomplete[tc_addr_type].getPlace()));
 
-                    const initialIso = $(`[data-address-type=${tc_addr_type}] [name=id_country]`).children('option').filter(':selected').attr('data-iso-code');
-                    tc_autocomplete[tc_addr_type].setComponentRestrictions({'country': initialIso});
-                    $('body').off('googlePlacesScriptLoadCallback').on('change.componentRestrictions', `[data-address-type=${tc_addr_type}] [name=id_country]`, function() {
-                        console.log('Google places, change.componentRestrictions change listener called');
-                        if (tc_autocomplete && tc_autocomplete[tc_addr_type]) {
-                            const iso = $(this).children('option').filter(':selected').attr('data-iso-code');
-                            if (debug_google_places == 1) {
-                                console.log(`setting '${iso}' as component/country restriction`)
-                            }
-                            tc_autocomplete[tc_addr_type].setComponentRestrictions({'country': iso});
-                        }
-                    });
-                }
-            }
+    function tc_reInitGooglePlaces() {
+        initGooglePlacesAutocomplete();
+    }
+
+    // Called by the Google Maps API once it has loaded (via the &callback= parameter).
+    // DOMContentLoaded has already fired by this point in virtually all real-world cases,
+    // so we use jQuery ready() which executes immediately when the DOM is already loaded.
+    function googlePlacesScriptLoadCallback() {
+        $(function () {
+            initGooglePlacesAutocomplete();
         });
     }
 
-    function googlePlaceChanged(addressType, place) {
-        if (place.address_components) {
-            if (debug_google_places == 1) {
-                console.log(addressType, place);
-            }
-            const placeDetails = place.address_components.reduce((acc, x) => ({...acc, [x.types[0]]: x.long_name}), {});
-            if (debug_google_places == 1) {
-                console.log('Place details: ', placeDetails);
-            }
-
-            const streetNumberFirst = ['US', 'GB', 'AU'].includes(tc_autocomplete[addressType]?.componentRestrictions?.country);
-
-            const tc_place_address = {};
-            if (streetNumberFirst) {
-                tc_place_address.street = `${placeDetails?.street_number || ''} ${placeDetails?.route || ''}`;
-            } else {
-                tc_place_address.street = `${placeDetails?.route || ''} ${placeDetails?.street_number || ''}`;
-            }
-            tc_place_address.city = placeDetails?.locality || placeDetails?.sublocality_level_1 || '';
-            tc_place_address.postcode = placeDetails?.postal_code || '';
-            tc_place_address.state = placeDetails?.administrative_area_level_1 || '';
-
-            if (debug_google_places == 1) {
-                console.log(tc_place_address);
+    function initGooglePlacesAutocomplete() {
+        if (typeof google === 'undefined' || !google.maps || !google.maps.places) {
+            return;
+        }
+        for (const tc_addr_type of ['invoice', 'delivery']) {
+            const addressInput = document.querySelector('[data-address-type=' + tc_addr_type + '] [name=address1]');
+            if (!addressInput) {
+                continue;
             }
 
-            var mapPlacePropsToFields = {
-                address1: 'street',
-                city: 'city',
-                postcode: 'postcode',
-                id_state: 'state'
+            tc_autocomplete[tc_addr_type] = new google.maps.places.Autocomplete(addressInput, {
+                fields: ['address_components'],
+                strictBounds: false,
+                types: ['address'],
+            });
+            tc_autocomplete[tc_addr_type].addListener('place_changed', function (addrType) {
+                return function () {
+                    googlePlaceChanged(addrType, tc_autocomplete[addrType].getPlace());
+                };
+            }(tc_addr_type));
+
+            // Set country restriction only when a real country is already selected
+            var initialIso = $('[data-address-type=' + tc_addr_type + '] [name=id_country] option:selected').attr('data-iso-code');
+            if (initialIso) {
+                tc_autocomplete[tc_addr_type].setComponentRestrictions({'country': initialIso});
             }
 
-            var el;
-            var stateEl;
-            for (const [fieldName, propName] of Object.entries(mapPlacePropsToFields)) {
-                el = $(`[data-address-type=${addressType}] [name=${fieldName}]`);
-                if (tc_place_address && tc_place_address[propName]) {
-                    if (propName === 'state') {
-                        stateEl = el.find('option').filter(function() {
-                            return $.trim($(this).text()).toLowerCase() === (tc_place_address[propName] || '').toLowerCase();
-                        });
-                        if (stateEl && stateEl.length) {
-                           stateEl.attr('selected', true).trigger('change');
+            // Update restriction whenever the customer picks a different country.
+            // Use a namespaced event so re-initialisation (tc_reInitGooglePlaces) can
+            // cleanly remove the previous handler before attaching a new one.
+            $('body')
+                .off('change.googlePlacesCountry', '[data-address-type=' + tc_addr_type + '] [name=id_country]')
+                .on('change.googlePlacesCountry', '[data-address-type=' + tc_addr_type + '] [name=id_country]', (function (addrType) {
+                    return function () {
+                        var iso = $(this).children('option:selected').attr('data-iso-code');
+                        if (tc_autocomplete[addrType] && iso) {
+                            tc_autocomplete[addrType].setComponentRestrictions({'country': iso});
                         }
-                    } else {
-                        el.val(tc_place_address[propName] || '');
-                        setTimeout(function (thisEl) {
-                            // console.log('el.val', thisEl.val())
-                            thisEl.change();
-                        }, 100, el);
-                    }
+                    };
+                })(tc_addr_type));
+
+            if (debug_google_places) {
+                console.log('Google Places Autocomplete initialised for:', tc_addr_type, addressInput);
+            }
+        }
+    }
+
+    function googlePlaceChanged(addressType, place) {
+        if (!place || !place.address_components) {
+            return;
+        }
+        if (debug_google_places) {
+            console.log('googlePlaceChanged', addressType, place);
+        }
+
+        var placeDetails = place.address_components.reduce(function (acc, x) {
+            acc[x.types[0]] = x.long_name;
+            return acc;
+        }, {});
+
+        var country = tc_autocomplete[addressType] && tc_autocomplete[addressType].componentRestrictions
+            ? tc_autocomplete[addressType].componentRestrictions.country
+            : '';
+        var streetNumberFirst = ['US', 'GB', 'AU'].indexOf(country) !== -1;
+
+        var street;
+        if (streetNumberFirst) {
+            street = ((placeDetails.street_number || '') + ' ' + (placeDetails.route || '')).trim();
+        } else {
+            street = ((placeDetails.route || '') + ' ' + (placeDetails.street_number || '')).trim();
+        }
+
+        var tc_place_address = {
+            street:   street,
+            city:     placeDetails.locality || placeDetails.sublocality_level_1 || '',
+            postcode: placeDetails.postal_code || '',
+            state:    placeDetails.administrative_area_level_1 || ''
+        };
+
+        if (debug_google_places) {
+            console.log('Parsed place:', tc_place_address);
+        }
+
+        var mapPlacePropsToFields = {
+            address1: 'street',
+            city:     'city',
+            postcode: 'postcode',
+            id_state: 'state'
+        };
+
+        for (var fieldName in mapPlacePropsToFields) {
+            var propName = mapPlacePropsToFields[fieldName];
+            if (!tc_place_address[propName]) {
+                continue;
+            }
+            var el = $('[data-address-type=' + addressType + '] [name=' + fieldName + ']');
+            if (propName === 'state') {
+                var stateVal = tc_place_address[propName].toLowerCase();
+                var stateEl = el.find('option').filter(function () {
+                    return $.trim($(this).text()).toLowerCase() === stateVal;
+                });
+                if (stateEl.length) {
+                    stateEl.prop('selected', true).trigger('change');
                 }
+            } else {
+                el.val(tc_place_address[propName]);
+                setTimeout(function (thisEl) {
+                    thisEl.trigger('change');
+                }, 100, el);
             }
         }
     }
 </script>
 {/literal}
+{/if}

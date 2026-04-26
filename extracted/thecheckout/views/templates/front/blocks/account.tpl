@@ -27,7 +27,11 @@
           {assign parentTplName 'account'}
           {foreach from=$formFieldsAccount item="field"}
             {block name='form_field'}
-              {include file='module:thecheckout/views/templates/front/_partials/checkout-form-fields.tpl' checkoutSection='account'}
+              {* Email is rendered at the top of the address block (address-delivery.tpl)
+                 so it appears as the very first field of the combined step. *}
+              {if $field.name !== 'email'}
+                {include file='module:thecheckout/views/templates/front/_partials/checkout-form-fields.tpl' checkoutSection='account'}
+              {/if}
             {/block}
           {/foreach}
         {/block}

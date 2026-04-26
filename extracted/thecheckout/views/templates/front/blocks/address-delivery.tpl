@@ -50,6 +50,18 @@
 {/if}
 <div class="block-header address-name-header">{l s='Shipping address' mod='thecheckout'}</div>
 <div class="inner-wrapper">
+  {* Email shown at the top of the address block so step 1 = email + address combined.
+     Only for guests/new customers; logged-in customers already have their email on file. *}
+  {if !isset($customer) || !$customer.is_logged || $customer.is_guest}
+    <form class="account-fields embedded-email-form">
+      {foreach from=$formFieldsAccount item="field"}
+        {if $field.name === 'email'}
+          {include file='module:thecheckout/views/templates/front/_partials/checkout-form-fields.tpl' checkoutSection='account'}
+        {/if}
+      {/foreach}
+    </form>
+  {/if}
+
   <a style="display: none;" href="javascript:void(0);" class="amazonpay-change-address">{l s='Change address' mod='thecheckout'}</a>
 
   {if $tc_config->show_i_am_business_delivery}
