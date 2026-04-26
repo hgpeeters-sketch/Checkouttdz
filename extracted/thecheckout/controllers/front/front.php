@@ -2296,8 +2296,16 @@ class TheCheckoutModuleFrontController extends ModuleFrontController
             );
         }
 
-        $countryId = (isset($formData['id_country'])) ? $formData['id_country'] : 0;
-        $country   = ($countryId > 0) ? new Country($countryId) : $this->context->country;
+        $countryId = isset($formData['id_country']) ? (int)$formData['id_country'] : 0;
+        if ($countryId > 0) {
+            $country = new Country($countryId);
+        } else {
+            // No country selected yet; clone to avoid mutating the shared context object,
+            // and disable zip-code format validation so we don't reject any entry while
+            // the user is still filling in the form.
+            $country = clone $this->context->country;
+            $country->need_zip_code = false;
+        }
 
         // Primary address can be updated freely; secondary only if addresses are not same
         // Note: For now (Nov.2018), isPrimaryAddress won't be used and we'll treat both addresses separately
