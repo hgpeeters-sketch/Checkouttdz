@@ -418,23 +418,14 @@ class TheCheckoutModuleFrontController extends ModuleFrontController
                 if ($entity === 'Country') {
                     $formField->setType('countrySelect');
 
-                    $guessCountry = false;
-                    $thisLang = "not-set";
-                    // Unselect country if we just initiated session and force_customer_to_choose_country is ON
-                    if ($this->module->config->force_customer_to_choose_country && empty($addressData)) {
-                        $guessCountry = true; // Guess country based on selected language
-                        $thisLang = Tools::strtolower($this->context->language->locale);
-                        $thisLang = Tools::substr($thisLang, strpos($thisLang, '-') + 1);
+                    // Leave country empty when no address exists so the user is forced to select
+                    if (empty($addressData)) {
                         $formField->setValue('');
                     } else {
                         $formField->setValue($country->id);
                     }
 
                     foreach ($this->availableCountries as $countryDetail) {
-                        if ($guessCountry &&
-                            $thisLang == Tools::strtolower($countryDetail['iso_code'])) {
-                            $formField->setValue($countryDetail['id_country']);
-                        }
                         $formField->addAvailableValue(
                             $countryDetail['id_country'],
                             array(
