@@ -401,7 +401,6 @@ class Config
     public $module_customer_fields = array('newsletter', 'customer_privacy', 'psgdpr');
 
     public $invoice_fields = array(
-        "Country:name" => array("visible" => true, "required" => true, "width" => 100, "live" => false),
         "firstname"    => array("visible" => true, "required" => true, "width" => 50, "live" => false),
         "lastname"     => array("visible" => true, "required" => true, "width" => 50, "live" => false),
         "company"      => array("visible" => true, "required" => false, "width" => 100, "live" => false),
@@ -409,16 +408,16 @@ class Config
         "vat_number"   => array("visible" => true, "required" => false, "width" => 100, "live" => false),
         "address1"     => array("visible" => true, "required" => true, "width" => 75, "live" => true),
         "address2"     => array("visible" => false, "required" => false, "width" => 25, "live" => false),
-        "postcode"     => array("visible" => true, "required" => false, "width" => 50, "live" => true),
-        "city"         => array("visible" => true, "required" => true, "width" => 50, "live" => true),
+        "city"         => array("visible" => true, "required" => true, "width" => 100, "live" => true),
         "State:name"   => array("visible" => true, "required" => true, "width" => 100, "live" => true),
+        "postcode"     => array("visible" => true, "required" => false, "width" => 100, "live" => true),
+        "Country:name" => array("visible" => true, "required" => true, "width" => 100, "live" => false),
         "phone"        => array("visible" => true, "required" => true, "width" => 100, "live" => false),
         "phone_mobile" => array("visible" => false, "required" => false, "width" => 100, "live" => false),
         "other"        => array("visible" => false, "required" => false, "width" => 100, "live" => false)
     );
 
     public $delivery_fields = array(
-        "Country:name" => array("visible" => true, "required" => true, "width" => 100, "live" => false),
         "firstname"    => array("visible" => true, "required" => true, "width" => 50, "live" => false),
         "lastname"     => array("visible" => true, "required" => true, "width" => 50, "live" => true),
         "company"      => array("visible" => false, "required" => false, "width" => 100, "live" => false),
@@ -426,9 +425,10 @@ class Config
         "vat_number"   => array("visible" => false, "required" => false, "width" => 100, "live" => false),
         "address1"     => array("visible" => true, "required" => true, "width" => 75, "live" => false),
         "address2"     => array("visible" => false, "required" => false, "width" => 25, "live" => false),
-        "postcode"     => array("visible" => true, "required" => false, "width" => 50, "live" => true),
-        "city"         => array("visible" => true, "required" => true, "width" => 50, "live" => false),
+        "city"         => array("visible" => true, "required" => true, "width" => 100, "live" => false),
         "State:name"   => array("visible" => true, "required" => true, "width" => 100, "live" => true),
+        "postcode"     => array("visible" => true, "required" => false, "width" => 100, "live" => true),
+        "Country:name" => array("visible" => true, "required" => true, "width" => 100, "live" => false),
         "phone"        => array("visible" => true, "required" => true, "width" => 100, "live" => false),
         "phone_mobile" => array("visible" => false, "required" => false, "width" => 100, "live" => false),
         "other"        => array("visible" => false, "required" => false, "width" => 100, "live" => false)

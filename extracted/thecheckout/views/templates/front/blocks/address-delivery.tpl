@@ -50,18 +50,6 @@
 {/if}
 <div class="block-header address-name-header">{l s='Shipping address' mod='thecheckout'}</div>
 <div class="inner-wrapper">
-  {* Email shown at the top of the address block so step 1 = email + address combined.
-     Only for guests/new customers; logged-in customers already have their email on file. *}
-  {if !isset($customer) || !$customer.is_logged || $customer.is_guest}
-    <form class="account-fields embedded-email-form">
-      {foreach from=$formFieldsAccount item="field"}
-        {if $field.name === 'email'}
-          {include file='module:thecheckout/views/templates/front/_partials/checkout-form-fields.tpl' checkoutSection='account'}
-        {/if}
-      {/foreach}
-    </form>
-  {/if}
-
   <a style="display: none;" href="javascript:void(0);" class="amazonpay-change-address">{l s='Change address' mod='thecheckout'}</a>
 
   {if $tc_config->show_i_am_business_delivery}
@@ -105,23 +93,6 @@
       </section>
     {/block}
   </form>
-  {* BOTTOM: optional account creation fields (password) for non-logged/guest users.
-     Placed here so email + address + optional password are all in one visible step,
-     regardless of how the admin has configured the checkout step blocks. *}
-  {if !isset($customer) || !$customer.is_logged || $customer.is_guest}
-    {assign parentTplName 'account'}
-    <form class="account-fields embedded-account-bottom">
-      <section class="form-fields">
-        {foreach from=$formFieldsAccount item="field"}
-          {if $field.name !== 'email'}
-            {block name='form_field_account_bottom'}
-              {include file='module:thecheckout/views/templates/front/_partials/checkout-form-fields.tpl' checkoutSection='account'}
-            {/block}
-          {/if}
-        {/foreach}
-      </section>
-    </form>
-  {/if}
   {if !$isInvoiceAddressPrimary}
     <div class="second-address">
       <span class="custom-checkbox">

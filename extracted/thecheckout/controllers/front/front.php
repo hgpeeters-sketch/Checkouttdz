@@ -418,14 +418,23 @@ class TheCheckoutModuleFrontController extends ModuleFrontController
                 if ($entity === 'Country') {
                     $formField->setType('countrySelect');
 
-                    // Leave country empty when no address exists so the user is forced to select
-                    if (empty($addressData)) {
+                    $guessCountry = false;
+                    $thisLang = "not-set";
+                    // Unselect country if we just initiated session and force_customer_to_choose_country is ON
+                    if ($this->module->config->force_customer_to_choose_country && empty($addressData)) {
+                        $guessCountry = true; // Guess country based on selected language
+                        $thisLang = Tools::strtolower($this->context->language->locale);
+                        $thisLang = Tools::substr($thisLang, strpos($thisLang, '-') + 1);
                         $formField->setValue('');
                     } else {
                         $formField->setValue($country->id);
                     }
 
                     foreach ($this->availableCountries as $countryDetail) {
+                        if ($guessCountry &&
+                            $thisLang == Tools::strtolower($countryDetail['iso_code'])) {
+                            $formField->setValue($countryDetail['id_country']);
+                        }
                         $formField->addAvailableValue(
                             $countryDetail['id_country'],
                             array(
@@ -1872,19 +1881,6 @@ class TheCheckoutModuleFrontController extends ModuleFrontController
         if (!key_exists('id_state', $addressData)) {
             $addressData['id_state'] = 0;
         }
-
-        // PS core requires at least one phone when PS_ONE_PHONE_AT_LEAST is set.
-        // When phone is optional in TheCheckout and the customer left both fields empty,
-        // supply a minimal placeholder so the Address::save() does not throw.
-        // '00' is truthy in PHP and passes PS Validate::isPhoneNumber().
-        if (Configuration::get('PS_ONE_PHONE_AT_LEAST')) {
-            $hasPhone       = isset($addressData['phone'])        && '' !== trim($addressData['phone']);
-            $hasPhoneMobile = isset($addressData['phone_mobile']) && '' !== trim($addressData['phone_mobile']);
-            if (!$hasPhone && !$hasPhoneMobile) {
-                $addressData['phone'] = '00';
-            }
-        }
-
         if ($existingAddressId > 0) {
             $addressData['id_address'] = $existingAddressId;
         }
@@ -2296,16 +2292,8 @@ class TheCheckoutModuleFrontController extends ModuleFrontController
             );
         }
 
-        $countryId = isset($formData['id_country']) ? (int)$formData['id_country'] : 0;
-        if ($countryId > 0) {
-            $country = new Country($countryId);
-        } else {
-            // No country selected yet; clone to avoid mutating the shared context object,
-            // and disable zip-code format validation so we don't reject any entry while
-            // the user is still filling in the form.
-            $country = clone $this->context->country;
-            $country->need_zip_code = false;
-        }
+        $countryId = (isset($formData['id_country'])) ? $formData['id_country'] : 0;
+        $country   = ($countryId > 0) ? new Country($countryId) : $this->context->country;
 
         // Primary address can be updated freely; secondary only if addresses are not same
         // Note: For now (Nov.2018), isPrimaryAddress won't be used and we'll treat both addresses separately

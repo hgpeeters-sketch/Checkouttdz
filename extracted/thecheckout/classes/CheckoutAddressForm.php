@@ -96,8 +96,7 @@ class CheckoutAddressForm extends AbstractForm
         // country is being submitted!
         // So we first update the format if a new id_country was set.
         if (isset($params['id_country'])
-            && (int)$params['id_country'] > 0
-            && (int)$params['id_country'] != $this->formatter->getCountry()->id
+            && $params['id_country'] != $this->formatter->getCountry()->id
         ) {
             $this->formatter->setCountry(new Country(
                 $params['id_country'],

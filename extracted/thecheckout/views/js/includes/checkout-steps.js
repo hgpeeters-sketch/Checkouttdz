@@ -10,30 +10,6 @@
 
 var debug_steps = true
 
-// Returns true if any block in the given step has rendered HTML content.
-// Used to auto-skip steps that are empty for the current user (e.g., the account
-// step is empty for guests because those fields are embedded inside address-delivery).
-function stepHasContent(stepId) {
-    if (typeof tc_steps === 'undefined' || !tc_steps) {
-        return true;
-    }
-    var stepConfig = null;
-    for (var i = 0; i < tc_steps.length; i++) {
-        if (tc_steps[i].step === stepId) { stepConfig = tc_steps[i]; break; }
-    }
-    if (!stepConfig) {
-        return true;
-    }
-    var blocks = stepConfig.blocks.split(',');
-    for (var b = 0; b < blocks.length; b++) {
-        var $innerArea = $('#thecheckout-' + blocks[b].trim() + ' .inner-area');
-        if ($innerArea.length && $.trim($innerArea.html()).length > 0) {
-            return true;
-        }
-    }
-    return false;
-}
-
 function validateStep(stepId) {
     // $('.delivery-options input[name^=delivery_option]:checked').length
     // $('input[name="payment-option"]:checked').length
@@ -137,18 +113,7 @@ $(document).ready(function () {
     var initStep = location.hash.substring(1);
 
     if (initStep == '') {
-        // Find the first step that has rendered content; skip empty steps (e.g., the
-        // account step when its fields have been moved into address-delivery for guests).
-        var startStep = 1;
-        if (typeof tc_steps !== 'undefined' && tc_steps) {
-            for (var i = 0; i < tc_steps.length; i++) {
-                if (stepHasContent(tc_steps[i].step)) {
-                    startStep = tc_steps[i].step;
-                    break;
-                }
-            }
-        }
-        setHash(startStep);
+        setHash(1);
     } else {
         // window.location.hash = '';
         setHash(initStep);
