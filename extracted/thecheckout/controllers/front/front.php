@@ -1872,6 +1872,19 @@ class TheCheckoutModuleFrontController extends ModuleFrontController
         if (!key_exists('id_state', $addressData)) {
             $addressData['id_state'] = 0;
         }
+
+        // PS core requires at least one phone when PS_ONE_PHONE_AT_LEAST is set.
+        // When phone is optional in TheCheckout and the customer left both fields empty,
+        // supply a minimal placeholder so the Address::save() does not throw.
+        // '00' is truthy in PHP and passes PS Validate::isPhoneNumber().
+        if (Configuration::get('PS_ONE_PHONE_AT_LEAST')) {
+            $hasPhone       = isset($addressData['phone'])        && '' !== trim($addressData['phone']);
+            $hasPhoneMobile = isset($addressData['phone_mobile']) && '' !== trim($addressData['phone_mobile']);
+            if (!$hasPhone && !$hasPhoneMobile) {
+                $addressData['phone'] = '00';
+            }
+        }
+
         if ($existingAddressId > 0) {
             $addressData['id_address'] = $existingAddressId;
         }
