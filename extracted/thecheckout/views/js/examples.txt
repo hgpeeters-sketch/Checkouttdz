@@ -1,0 +1,128 @@
+// ##### Example 1 #####
+// Make 'dni' field required only for Italy - add this Custom JS:
+
+tc_confirmOrderValidations['dni_required_for_italy'] = function () {
+      var italyCountryId = 2;
+      var errorMsg = 'Required field';
+      $('#thecheckout-address-invoice input[name=dni]').removeClass('-error');
+      removeError('#thecheckout-address-invoice .error-msg');
+      if (
+        italyCountryId == $('#thecheckout-address-invoice select[name=id_country]').val() && 
+        $('#thecheckout-address-invoice input[name=dni]').is(':visible') &&
+        '' == jQuery.trim($('#thecheckout-address-invoice input[name=dni]').val())
+      ) {
+        $('#thecheckout-address-invoice input[name=dni]').addClass('-error');
+        $('#thecheckout-address-invoice input[name=dni]').after('<div class="field error-msg">' + errorMsg + '</div>');
+        scrollToError();
+        return false;
+      } else {
+        return true;
+      }
+};
+
+// ##### Example 2 #####
+// Make 'dni' field required only for Italy and only when 'I am a business customer' is *unticked*,
+// including *-mark next to field - add this Custom JS:
+
+tc_confirmOrderValidations['dni_required_for_italy_non_business'] = function () {
+      var italyCountryId = 2;
+      var errorMsg = 'Required field';
+      $('#thecheckout-address-invoice input[name=dni]').removeClass('-error');
+      removeError('#thecheckout-address-invoice .error-msg');
+      if (
+        italyCountryId == $('#thecheckout-address-invoice select[name=id_country]').val() &&
+        $('#thecheckout-address-invoice input[name=dni]').is(':visible') &&
+        '' == jQuery.trim($('#thecheckout-address-invoice input[name=dni]').val()) &&
+        !$('#i_am_business').is(':checked')
+      ) {
+        $('#thecheckout-address-invoice input[name=dni]').addClass('-error');
+        $('#thecheckout-address-invoice input[name=dni]').after('<div class="field error-msg">' + errorMsg + '</div>');
+        scrollToError();
+        return false;
+      } else {
+        return true;
+      }
+};
+
+$('body').on('change', '[data-link-action=x-i-am-business]', function () {
+        let dniLabelEl = $('#thecheckout-address-invoice input[name=dni]').closest('label');
+        if ($(this).prop('checked')) {
+            dniLabelEl.removeClass('required');
+        } else {
+            dniLabelEl.addClass('required');
+        }
+
+        return false;
+});
+
+$(document).ready(function() {
+        // Initial setup - set field required (visually) when above conditions are met
+        $('[data-link-action=x-i-am-business]').trigger('change');
+});
+
+// ##### Example 3 #####
+// Hide certain fields for virtual cart
+// Add this to custom CSS (choose which fields and in which block; !important flag is due to postcode being managed from JS)
+body.is-virtual-cart #thecheckout-address-invoice
+:is(.form-group.firstname, .form-group.city, .form-group.postcode) {
+    display: none!important;
+}
+
+// ##### Example 4 #####
+// Add 2nd email (verification) field
+1/ Add Custom CSS in checkout module settings:
+
+/* Custom CSS for emails verification */
+.form-group.email-verification .field-label:before  {
+    display: inline-block;
+    float: right;
+    font-weight: normal;
+    padding-left: 5px;
+}
+.lang-en .email-verification .field.error-msg {
+    display: block;
+}
+
+/* English and Danish versions, for other languages, add new rules .lang-xx prefix instead of .lang-en */
+.lang-en .email-verification .field.error-msg.emails-do-not-match:before {
+    content: 'Emails do not match';
+}
+.lang-en .form-group.email-verification .field-label:before  {
+    content: '(repeat)';
+}
+.lang-da .email-verification .field.error-msg.emails-do-not-match:before {
+    content: 'E-mail adresserne er ikke ens';
+}
+.lang-da .form-group.email-verification .field-label:before  {
+    content: '(en gang til)';
+}
+
+2/ Add Custom JS in checkout module settings:
+
+document.addEventListener('DOMContentLoaded', function(event) {
+    //jQuery shall be loaded now
+    var email_selector = '.account-fields .form-group.email:not(.email-verification)';
+    var email_verif_selector = '.account-fields .form-group.email-verification';
+
+    tc_confirmOrderValidations['email_verification'] = function() {
+        $(email_verif_selector +' .error-msg').remove();
+        if (
+            $(email_verif_selector + ' input[name=email]:visible').length  &&
+            $(email_selector + ' input[name=email]').val() != $(email_verif_selector + ' input[name=email]').val()
+        ) {
+            $(email_verif_selector + ' label').addClass('-error');
+            $(email_verif_selector + ' label input').after('<div class="field error-msg emails-do-not-match"></div>');
+            scrollToElement($(email_verif_selector));
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    $('.account-fields .form-group.email:visible').clone().addClass('email-verification').insertAfter('.account-fields .form-group.email');
+    if (prestashop.language.iso_code == 'en') {
+        $(email_verif_selector + ' .field-label').html('Confirm e-mail ');
+    } else if (prestashop.language.iso_code == 'da') {
+        $(email_verif_selector + ' .field-label').html('Bekræft e-mail ');
+    }
+});

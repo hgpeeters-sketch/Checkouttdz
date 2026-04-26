@@ -1,0 +1,327 @@
+v3.3.8 - 20230428
+[fix] Allow multiple 'sticky' elements in a column
+[feature] Display google and fb social login also on PS native login page
+[fix-payment] Braintreeofficial v1.2.5
+[fix-payment] Paypal v5.8.0
+[fix-payment] Stripe_official v3.0.2
+[fix-payment] Revolut payments v2.2.4
+[fix-shipping] glsshipping v3.2.10
+[fix] Checkout steps improvement - scrolling to errors on other pages
+[fix-shipping] dpdfrance v6.1.3
+[feature] Move login block to account section
+[fix-shipping] Chronopost v6.4.0
+[feature] Smartform integration (Czech / Slovak addresses suggestions)
+[fix-payment] PayU parser
+[feature] Anvanto's an_productfields module support (modify also template! cart-detailed-product-line.tpl)
+[fix-payment] wallee support
+[fix-payment] Stripe_official v2.5.0
+[fix-shipping] Update JS's prestashop.customer.addresses used by DHL module
+[feature] New config options - I am business / private also in delivery address
+[fix-shipping] mondialrelay - changing delivery address (reload) fix
+
+v3.3.7 - 20230112
+[fix-payment] ps_checkout v2.21.0 parser fix
+[feature] collapsible shipping / payment methods
+[feature] set 'selected' class to chosen shipping/payment methods (so that it can be styled further)
+[feature] improved voucher button styling and added progress bar to remaining amount to get free shipping
+[feature] Google places auto-complete
+[fix] silent registration creating 'Customer' from 'Guest' even when email has been already registered
+[feature] checkout steps - now it's possible to set multi-step, but still 'one page' checkout
+[fix-shipping] gmparcellocker v1.4.3 compatibility update
+[fix] for logged-in customers, separate payment step did not set checkout_session
+[fix-payment] paynow (both blik and pbl methods)
+[fix-payment] postfinancecheckout v1.2.3 - by Customweb
+[fix-payment] paypalpro parser fix for Firefox
+
+v3.3.6 - 20221007
+[fix-payment] checkoutcom v2.3.1 - by Checkout.com
+[fix-payment] paypalpro v2.0.5 - by Presto-Changeo support
+[fix-payment] paypal 5.7.1 support
+[fix] more resilient FB login initialization
+[fix-payment] a4pauthorizenet v2.0.1 support
+[fix-payment] klarnapaymentsofficial v2.1.11 support
+[fix] double loader displayed for dynamic blocks on initial page load
+[fix-payment] paynow, unintended scroll to paynow_blik_code element
+[fix-shipping] gmsparcellocker
+[fix-shipping] chronopost - pickup points and map
+[fix-payment] paypalfeeplus - support for fee in summary
+[feature] Added remaining amount to get free shipping in cart summary
+[fix] Prestashop v8 - new hook support 'displayCheckoutBeforeConfirmation'
+[fix] T&C modal opened twice
+
+v3.3.5 - 20220718
+[fix-payment] Paypal express checkout shall not show as popup payment type, if there are multiple Paypal options
+[fix-payment] Prestashop Checkout v2.20.1 support
+[fix] Add validation for customer first/last name
+[fix] New Google Identity sign-in
+[fix-shipping] shipmondo pickup point validation enforced even for virtual product
+[fix-shipping] upsservice dropdown point selector support
+[fix] Improved virtual cart support (see views/js/examples.txt, example no.3)
+[feature] Added total-weight display to the cart (hidden by default)
+[fix] _getExtraAccountParams() did not consider status of checkbox
+[fix-payment] multisafepay module fix ($kernel not started)
+[fix-payment] blik payment (paynow module), incorrect redirection in no-button mode
+[fix-shipping] inpostshipping - choose paczkomat warning was displayed even on non-paczkomat shipping option
+[fix-payment] payplug v3.6.3, integration notice update (changed file path)
+[fix-shipping] vp_omniva and vp_smartpost support (validation of selected pickup point)
+
+v3.3.4 - 20220317
+[fix-payment] improved support for paypal v5.5.0
+[fix] bug - "Payment options on separate page" payment step was unreachable when shipping address was not visible
+[fix-payment] partial unzercw support (except card payment)
+[fix-payment] paynow support (Blik payment)
+[fix-shipping] dpdpoland support (DPD pickup point)
+[fix-shipping] inpostshipping support (Paczkomat)
+[fix-shipping] pocztapolskaen support (Poczta Polska pickup point)
+[fix-shipping] ruch support (ORLEN Paczka)
+[fix] Fix for openresty web server not accepting value-less parameters in xmlhttp data
+[fix] Added option tcGlobal_fetchAgainAfterVoucher (overridable through custom JS)
+[fix-shipping] myparcelnl support
+[fix-payment] mollie payments - fee display support
+[fix] Variant product image in cart instead of cover image
+[fix] Added tooltip to configuration for 'live' field to better explain the purpose
+[fix] prestatillhomedelivery validation method failed if multiple delivery_options per cart were available
+[fix] djtalbrazilianregister support (CPF, CNPJ fields support for Brazil)
+[fix-payment] Adyen official v3.7.1 by Adyen
+[fix] Fix number of columns in BO settings page (PS 1.7.8 fix)
+[fix] EU VAT number + PS 1.7.8, fixed initial address load
+[fix-shipping] shipmondo Denmark (pickup point) support
+[feature] added 'after_load_callback' to shipping methods parsers
+[fix-shipping] colissimo (pickup point) support
+[fix] disallow order if quantity of product got suddenly below 0
+[fix-shipping] tntofficiel support
+[fix-payment] vivawalletofficial support
+[fix-payment] Amazon Pay - remove "binary" class from amazonpay option, to allow redirect with form submit
+[fix-payment] Amazon Pay (Checkout v2) - disable address edit during ongoing session
+
+v3.3.3 - 20211007
+[feature] When force_customer_to_choose_country is selected, try to guess customer's country from PS language
+[fix-payment] Amazon Pay (Checkout v2) v4.0.5 by patworx
+[fix-payment] zipmoneypayment support
+[fix] Shipping cost wasn't hidden if 'Force customer to choose country' has been enabled in settings
+
+v3.3.2 - 20210621
+[fix] Better discount_name targeting when adding voucher, to avoid multiple discount_name fields issue
+[fix-shipping] Packetery (updated support)
+[fix] Endless loop on shipping method changes when MyParcel module was installed
+[feature] Added new option - show Save Personal Information button
+[feature] Customer's Firstname / Lastname added into account block
+[fix-payment] pm_subscription support
+[fix-payment] PaypalPlus (German) initialization button
+[fix] VAT deduction did not work in PS 1.7.7 for customer_id = 0
+[fix-shipping] omnivaltshipping - pickup point validation
+[fix-shipping] itellashipping support
+[fix] email validation on PHP level
+[fix] arteinvoice SDI/PEC fields translations in checkout form
+[fix-payment] paypal (plus), v5.4.2 update
+[fix-payment] a4ppaypalpro support
+
+v3.3.1 - 20210329
+[fix] shipping methods were not updated properly when deleteFromCart ajax method was called
+[fix-shipping] gmparcellocker module support (selected point validation)
+[fix] Ps_Facebook isFirstCheckoutStep() error fix
+[feature] Along with business-type address, now there is also private-type address (for Italy)
+[fix] support for shipping module custom validation through hookActionValidateStepComplete
+[fix-shipping] amcpsshipit support
+[fix] dm_gdpr support
+[fix] Silent registration didn't work on PS 1.7.7 (due to Customer name validation not allowing empty string anymore)
+[fix] klarnapayments - wouldn't load payment block under certain circumstances
+[fix] When force-country is enabled, and no country is selected yet hide states selection
+[fix-shipping] prestatilldrive module support
+[fix-payment] ps_checkout module support (popup mode for Paypal and Card payment)
+
+v3.3.0 - 20201202
+[fix] set Customer group as default when converting guest after silent registration
+[fix-payment] paytpv module support
+[fix] Paypal express checkout - filter only this payment option during session
+[fix] Improved dark themes support and CSS color changes
+[feature] New config option - Force customer to choose carrier
+[feature] Added no-header class for blocks
+[fix-payment] Amazonpay integration improvements
+[fix-payment] pts_stripe module support
+[fix-payment] fee parsing for cashondeliverywithfee module
+[fix] T&C link did not work when extra markup was used inside of anchor tag
+[fix] tax label was visible in cart even when taxes were disabled
+[fix] cgma module support (Minimal order by customer group)
+[fix-shipping] Inpostship module support
+[fix] Dateofdelivery module support
+[fix] Explicitly hide voucher (default) error - troublesome on some themes
+
+v3.2.9 - 20200723
+[fix] Update documentation with Orderfees module integration instructions
+[fix] PS 1.7.6.7 compatibility fix (Cookie->registerSession added to updateCustomerInContext)
+[fix-shipping] Sendcloud integration fixes
+[fix] General error - specific translation when related to DNI field
+[fix-shipping] Furgonetka (InPost) module - pickup point selection check
+[fix-shipping] Shaim Zasilkovna better integration
+[fix-shipping] Packetery module integration fix
+
+v3.2.8 - 20200710
+[fix-payment] fee parsing for shaim_cashondelivery module
+[fix] New option - initialize address, to avoid refreshing delivery date/time widget on address modification
+[fix] At initial load, also inactive states were shown in dropdown
+[fix] Added hook at personal info block - displayPersonalInformationTop
+[fix-shipping] SendCloud shipping module - fixing parser for sendcloud 1.3.0 version
+[fix] general_error - better reporting from form validation module (e.g. sdi/pec validation)
+[fix] geotargetingpro module support
+[fix] stnewsletter default pre-tick support
+[fix] Improved ajaxComplete callback (loader fade-off)
+[fix] Update Google sign-in tutorial link
+[fix-payment] pms_gopay_extra support
+[fix] HTML in Custom CSS block was stripped-off
+[fix] amzpayments CSS fixes
+[fix] AWP module support (front.js, manual template update still necessary)
+
+v3.2.7 - 20200430
+[fix-payment] Twintcw payment module support
+[fix] Popup payment additional information added to stripe_official
+[fix-payment] Postfinancecw payment module
+[fix-payment] Stripe_official 2.0.8 popup mode added
+[fix] static_token update fix (cart quantity couldn't be altered properly for logged in customer after account validation
+[feature] Also Email field can be used in Shipping required fields - although, it's customer field (needed for relaygls module)
+[fix] Keep position of DNI field when it is shown in business fields as well as consumer fields (for Italy)
+[fix-payment] molliepayments module
+[feature] Support for einvoice module (PEC, SDI, PA fields for Italy)
+
+v3.2.6 - 20200217
+[fix] Improved RTL languages support
+[fix-payment] klarnapaymentsofficial v2.0.5
+[fix-shipping] EnvoiMoinsCher (Boxtal)
+[fix-payment] Payline by Monext
+[fix] When DNI was enforced for country, and hidden in business fields, DNI field error wasn't shown
+[feature] Support for einvoicingprestalia module (PEC and SDI fields for Italy)
+[feature] New option - Separate payment step - to support Prestashop Checkout payment module
+[feature] Config option - show international call prefix
+[fix] Reloading checkout page with certain 3rd party modules caused address data re-set
+[fix-payment] atcustompayment - payment fee parsing
+
+v3.2.5 - 20191127
+[fix] Documentation revision
+[fix] Translations update (DE, FR, ES, IT, SK)
+[fix-shipping] SendCloud shipping module
+[fix-shipping] Mondial Relay v3.0+ support
+[fix] need_identification_number from country config couldn't be disabled for (different) shipping address
+[fix-shipping] omniva carrier support
+[fix] refresh_minicart option was removed due to inconsistent theme support
+[fix] window.prestashop JS object is now extended, keeping .on and .once functions (fix for myparcel shipping)
+[feature] New config option: remove inner spaces from postcode as typed-in
+[feature] Guest checkout allowed even for registered customers
+[fix] Dots (without space after) in customer name are disallowed, but no error message was shown
+[fix] IE11 compatibility fix - removed template literals and arrow expressions
+[fix] Better support for autofill (multiple .live queries merged)
+
+v3.2.4 - 20191010
+[fix] Explicit autofill for firstname (given-name) and lastname (family-name)
+[fix-payment] paypal with paypalplus v5.0.1
+[fix-payment] stripe_official v2.0.5 (inline version)
+[feature] Newsletter checked by default - configuration switch
+[fix] Support for x13 privacy module
+
+v3.2.3 - 20190926
+[fix-shipping] myparcel shipping method - refresh the widget on carrier change
+[fix] Missing street number notice disappeared in 3.2.1 (due to styling fix for at_movic theme)
+[fix] Postcode and VAT number uppercase and white-spaces removal
+[feature] Automatic custom fields detection (added through override in Address.php class)
+[fix-payment] stripe_official v2.0.4 (inline version)
+[fix] Drag & Sort of fields in BO using Firefox, sometimes redirected to arbitrary.com (fixed in html5sortable library)
+[fix] Disabled product notification / error on checkout page wasn't visible
+[fix] Support for fattura24 module (Italian Indirizzo PEC and Codice Destinatario fields)
+
+v3.2.2 - 20190917
+[fix] popup() library function name renamed to avoid conflicts with other popup libs
+[fix] Required checkboxes set in TheCheckout configuration worked only for non-logged customers
+[feature] New option: Business disabled fields - list of fields that would be hidden for business customers
+
+v3.2.1 - 20190907
+[fix] Store also hidden payment inputs on payment block reload (to support Mollie payment methods)
+[fix] Force email overlay - shall not disappear when using already registered email
+[feature] Added show_product_stock_info config option, to show in-stock, out-of-stock or missing qty in cart summary
+[fix] submitReorder was allowed also for non-logged in customers (from default PS core)
+[fix-payment] klarnapaymentsofficial
+[fix-payment] stripe_official v2.0 (popup window)
+[fix-payment] creditcardofflinepayment (square bracket in name attribute)
+
+v3.2.0 - 20190626
+[feature] New checkout form styling theme - German style, clean checkout
+[feature] Shipping and Payment required fields - when not filled in, these section would be inaccessible
+[feature] Added possibility to hide shipping and total cost in cart summary when shipping method is not selected
+[fix] Improved showing shipping to (location) in shipping area - when enabled in config
+[fix] Reorganized configuration page for better readability
+[fix] Unset id_state when switching from one country (that has states) to another that also has states / provinces
+[fix] Improved performance on shipping refresh on checkout form
+
+v3.1.9 - 20190605
+[feature] Floating save button in configuration, squeezing top navigation bar in configuration
+[feature] Capitalize automatically fields: firstname, lastname, address1 and city, and uppercase postcode
+[fix] Refresh mini-cart (available for some themes)
+[fix] It was possible to proceed with order if quantity decreased during cart session on background
+
+v3.1.8 - 20190525
+[fix] Tax label shown incorrectly for tax exempt customers in shopping cart summary
+[feature] Missing street number notice
+[fix] Avoid customer account save if data wasn't changed
+[fix] Birthdate translation
+[fix] need_identification_number in country setup was not respected on checkout (e.g. for Italy)
+[fix-shipping] pakkelabels_shipping - display postnummer input box for pakkelabels shipping modules
+
+v3.1.7 - 20190412
+[feature] Force email overlay - show checkout form only to customers that entered email address
+[feature] Checkout blocks update loader - animation on Ajax requests
+[feature] Email can be also made optional (auto-creating email for registration)
+[feature] Compact cart option (better suited for cart summary in small width column)
+[feature] Faster BO loading, with on-demand tinyMCE loading
+[feature] Improved styles for narrow columns (especially login block and social buttons)
+[fix] Logged in customers do not need to agree with GDPR and policy again on checkout form
+
+v3.1.6 - 20190402
+[feature] Improved virtual carts, with many fields in business fields section
+[feature] Sticky position for cart block
+[fix-payment] codpro live fee display
+[fix] Better support for third party additionalCustomerFormFields (privacy checkboxes, etc.)
+[fix] Country and state combobox labels shall be marked required
+[fix] When 'Choose a password' is ticked, password shall be required field, regardless of guest checkout option
+[fix] Virtual cart support (hiding of shipping address and methods)
+
+v3.1.5 - 20190318
+[fix] Carrier prices do not update on cart product quantity change
+[fix-payment] Paypal with fee (fee parsing and display in cart summary)
+[fix-payment] Paypal's Braintree card payment
+[fix-shipping] Zasilkovna (packetery)
+[feature] Show country name in shipping methods selection
+[feature] New config option - force_customer_to_choose_country
+
+v3.1.4 - 20190210
+[fix] Postcode show/hide on country selection based on needZipCode config
+[fix] Business fields undefined issue when changing address directly on checkout
+[feature] Separate invoice and delivery addresses selection
+
+v3.1.3 - 20190201
+[fix-payment] codwfeeplus live fee display
+[fix-payment] codfee live fee display
+[fix-payment] Mollie multiple payment methods
+[feature] Different order of checkout blocks on mobile
+[feature] Business fields configurable, e.g. possibility to use 'other' field as Italian 'PEC'
+
+v3.1.2 - 20190126
+[fix-payment] Payline
+[fix-payment] Presto-Changeo Sagepay
+[fix-shipping] Omnivalt
+[fix] Endless loading of shipping and payment with some themes (early selectors init)
+
+v3.1.1 - 20181216
+[fix] Implemented reorder functionality from default PS
+
+v3.1.0 - 20181211
+[feature] CSS/JS cache version control
+[feature] Native Facebook and Google social logins
+[feature] 'Add new address' added as a clickable link instead of dropdown
+[feature] Copy invoice address vat_number and company into customer siret and company
+[fix-payment] Atos
+[fix] Quantity buttons background not visible in FF
+[fix] Unescape characters in order_message box (bug from PS core)
+
+v3.0.9 - 20181117
+[feature] Social login integration (Oneall social login module)
+
+v3.0.8 - 20181105
+First stable release, TheCheckout for PS1.7

@@ -1,0 +1,47 @@
+/* Use this to change color style of checkout form
+   1/ rename this file to color-change.css
+   2/ specify target color in attributes below
+   3/ go to codepen and enter target color there https://codepen.io/sosuke/pen/Pjoqqp
+   4/ change filter attribute as per calculation on codepen
+*/
+
+/*
+.page-content .checkout-block[class*='num-'] .block-header:before,
+.page-content .custom-checkbox input[type=checkbox] + span .checkbox-checked,
+.mark-required .page-content .form-group.text label.required .field-label::after,
+.mark-required .page-content .form-group.text.need-dni label .field-label::after,
+.mark-required .page-content .form-group.email label.required .field-label::after,
+.mark-required .page-content .form-group.password label.required .field-label::after,
+.mark-required .page-content .form-group.tel label.required .field-label::after,
+.mark-required .page-content .form-group.select label.required .field-label::after,
+.mark-required .page-content .form-group.countrySelect label.required .field-label::after,
+.page-content span.carrier-delay,
+.page-content .product-price {
+  color: #a458ff;
+}
+
+.page-content .checkout-block .inner-area .offer-login a,
+.checkout-block .inner-area .offer-login a:hover,
+.has-discount .discount {
+  background-color: #a458ff;
+}
+
+#content.page-content .custom-checkbox input[type=checkbox] + span {
+  border-color: #a458ff;
+}
+
+#content.page-content .custom-checkbox input[type=checkbox]:checked + span,
+#content.page-content .custom-radio input[type=radio]:checked + span {
+    background-image: url(../img/checkmark-bw.png)!important;
+    border-color: black;
+    filter: invert(49%) sepia(45%) saturate(7329%) hue-rotate(244deg) brightness(103%) contrast(101%);
+}
+
+.checkout-block .inner-area .offer-login a:hover {
+    opacity: 0.7;
+}
+*/
+
+
+
+

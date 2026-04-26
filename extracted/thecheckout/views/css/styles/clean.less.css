@@ -1,0 +1,224 @@
+#content {
+  background: white;
+}
+.checkout-block.main-block .inner-area {
+  border: 1px solid #d2d2d2;
+  border-radius: 5px;
+  padding-top: 34px;
+}
+.block-header,
+.already-account-label {
+  position: absolute;
+  top: -1.0em;
+  background: #fff;
+  font-weight: 700;
+  line-height: 1.2em;
+}
+.already-account-label {
+  font-size: 1.2em;
+  padding: 7px;
+  text-align: left;
+  left: 10px;
+}
+.offer-login .social-login {
+  margin-bottom: 5px;
+}
+.checkout-block[class*='num-'] .block-header:before {
+  display: none;
+}
+.checkout-block.main-block {
+  padding: 15px 7px;
+}
+.has-float-label input:placeholder-shown:not(:focus) ~ span.field-label,
+.has-float-label select:placeholder-shown:not(:focus) ~ span.field-label {
+  top: -25px;
+  cursor: text;
+  opacity: .8;
+}
+.has-float-label.required span.field-label,
+.need-dni .has-float-label span.field-label,
+.has-float-label span.field-label {
+  cursor: text;
+  font-weight: 700;
+  font-size: .95em;
+  opacity: 1;
+  top: -25px;
+  color: #101010;
+  position: absolute;
+}
+label.has-float-label {
+  margin-top: 20px;
+}
+.page-content .form-control,
+.page-content select.form-control-select.form-control {
+  border: 1px solid #d2d2d2;
+  border-radius: 3px;
+  padding: 10px;
+}
+.has-float-label input:focus,
+.has-float-label select:focus {
+  border-color: rgba(0, 16, 130, 0.5);
+}
+.has-float-label :not(:placeholder-shown):not(:focus) {
+  border-color: #d2d2d2;
+}
+.page-content .has-float-label select.form-control {
+  background: url("data:image/svg+xml;charset=utf8,%3Csvg width='27' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.792 1.547l10.983 11.047L24.78 1.547a.882.882 0 0 1 1.25 0 .89.89 0 0 1 0 1.254L14.42 14.454a.854.854 0 0 1-.623.26.9.9 0 0 1-.625-.26L1.565 2.8a.87.87 0 0 1-.022-1.253.882.882 0 0 1 1.25 0h-.001z' stroke='%23666' fill='%23666'/%3E%3C/svg%3E") no-repeat right 0.5em center;
+  background-size: 20px;
+}
+.customer-addresses {
+  margin-bottom: 30px;
+  font-size: 0.85em;
+}
+/* Cart summary block */
+.block-header.shopping-cart-header {
+  position: relative;
+  top: 0;
+  background: transparent;
+}
+#tc-container #thecheckout-cart-summary {
+  margin: 10px;
+}
+#thecheckout-cart-summary {
+  background: #f6f6f7;
+  overflow: hidden;
+}
+#thecheckout-cart-summary .inner-area {
+  border: none;
+  padding: 0;
+}
+#thecheckout-cart-summary .card {
+  box-shadow: none;
+  background: transparent;
+  margin: 0;
+}
+#thecheckout-cart-summary .cart-grid {
+  margin-bottom: 0;
+}
+#thecheckout-cart-summary .card-block {
+  padding: 5px;
+}
+div.product-line-actions .qty-box a {
+  display: block;
+  border: 1px solid #f6f6f7;
+  width: 25px;
+  background-size: 0.8em;
+}
+.product-line-actions .qty-box input {
+  background: transparent;
+  border: 1px solid #e5e5e5;
+}
+.product-line-actions .product-line-delete {
+  display: inline-block;
+}
+.product-line .product-line-info.product-price {
+  display: none;
+}
+.product-line img {
+  max-width: 100px;
+}
+.product-line-body {
+  justify-content: flex-end;
+}
+.product-line-actions {
+  flex-basis: 0;
+  flex-wrap: nowrap;
+  padding-top: 3px;
+}
+.product-line-desc br {
+  display: none;
+}
+.product-line-info.product-title {
+  font-weight: bold;
+}
+.cart-item .product-line {
+  flex-wrap: nowrap;
+}
+.cart-detailed-totals {
+  border-top: 1px solid #e5e5e5;
+}
+.cart-summary-line.cart-total:last-child {
+  border-top: 1px solid #e5e5e5;
+  padding-top: 10px;
+}
+.cart-summary.card {
+  padding: 0 5px;
+}
+.product-line-desc {
+  min-width: 100px;
+}
+/* Cart summary block END */
+/* Shipping / payment blocks */
+.payment-option label {
+  padding-top: 0;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+.payment-options .payment-option {
+  padding: 5px 0;
+  position: relative;
+}
+.shipping-radio {
+  flex-basis: auto;
+}
+.payment-option label span.h6 {
+  flex-grow: 1;
+}
+.payment-option .custom-radio {
+  margin-right: 20px;
+  margin-top: 0;
+}
+/* Shipping / payment blocks END */
+/* Reassurance block */
+.thecheckout-reassurance {
+  border: 1px solid #ccc;
+  padding: 20px;
+  text-align: center;
+  border-radius: 5px;
+}
+.reassurance-section {
+  margin: 20px auto 30px;
+}
+.reassurance-section.security:after,
+.reassurance-section.delivery:after {
+  content: "";
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 20px;
+  border-bottom: 2px solid #85cad9;
+}
+/* Reassurance block END */
+/* Checkboxes */
+.page-content .custom-checkbox input[type=checkbox]:checked + span {
+  filter: brightness(0);
+}
+.country-call-prefix {
+  font-size: 1.2em;
+  width: 49px;
+}
+/* einvoicing prestalia */
+label.col-md-3.form-control-label {
+  display: block;
+  max-width: 100%;
+  font-size: 0.9em;
+}
+.form-group.row {
+  display: block;
+  margin: 0;
+  margin-bottom: 1.25rem;
+}
+.form-group.row > .col-md-6 {
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+}
+.col-md-3.form-control-comment {
+  display: none;
+}
+/* no-header class treatment */
+.checkout-block.no-header {
+  margin-top: -37px;
+}
+/*# sourceMappingURL=data:application/json,%7B%22version%22%3A3%2C%22sources%22%3A%5B%22home%5C%2Fpeter%5C%2Fwww%5C%2Fpresta_178%5C%2Fmodules%5C%2Fthecheckout%5C%2Fviews%5C%2Fcss%5C%2Fstyles%5C%2Fclean.less%22%5D%2C%22names%22%3A%5B%5D%2C%22mappings%22%3A%22AAAA%3BEACE%3B%3BAAGF%2CeAAe%2CWAAY%3BEACzB%2CyBAAA%3BEACA%3BEACA%3B%3BAAGF%3BAAAe%3BEACb%3BEACA%3BEACA%3BEACA%3BEACA%3B%3BAAGF%3BEACE%3BEACA%3BEACA%3BEACA%3B%3BAAGF%2CYAAa%3BEACX%3B%3BAAGF%2CeAAe%2CeAAgB%2CcAAa%3BEAC1C%3B%3BAAGF%2CeAAe%3BEACb%2CiBAAA%3B%3BAAGF%2CgBAAiB%2CMAAK%2CkBAAkB%2CIAAI%2CQAAW%2COAAI%3BAAAc%2CgBAAiB%2COAAM%2CkBAAkB%2CIAAI%2CQAAW%2COAAI%3BEACnI%3BEACA%3BEACA%3B%3BAAGF%2CgBAAgB%2CSAAU%2CKAAI%3BAAAc%2CSAAU%2CiBAAiB%2CKAAI%3BAAAc%2CgBAAiB%2CKAAI%3BEAC5G%3BEACA%3BEACA%3BEACA%3BEACA%3BEACA%3BEACA%3B%3BAAGF%2CKAAK%3BEACH%3B%3BAAGF%2CaAAc%3BAAAe%2CaAAc%2COAAM%2CoBAAoB%3BEACnE%2CyBAAA%3BEACA%3BEACA%3B%3BAAGF%2CgBAAiB%2CMAAK%3BAAAQ%2CgBAAiB%2COAAM%3BEACnD%2CmCAAA%3B%3BAAGF%2CgBAAiB%2CKAAI%2CoBAAoB%2CIAAI%3BEAC3C%3B%3BAAGF%2CaAAc%2CiBAAiB%2COAAM%3BEACnC%2CgBAAgB%2CiYAAhB%3BEACA%3B%3BAAGF%3BEACE%3BEACA%3B%3B%3BAAMF%2CaAAa%3BEACX%3BEACA%3BEACA%3B%3BAAGF%2CaAAc%3BEACZ%3B%3BAAGF%3BEACE%3BEACA%3B%3BAAGF%2CyBAA0B%3BEACxB%3BEACA%3B%3BAAGF%2CyBAA0B%3BEACxB%3BEACA%3BEACA%3B%3BAAGF%2CyBAA0B%3BEACxB%3B%3BAAGF%2CyBAA0B%3BEACxB%3B%3BAAGF%2CGAAG%2CqBAAsB%2CSAAS%3BEAEhC%3BEACA%2CyBAAA%3BEACA%3BEACA%3B%3BAAGF%2CqBAAsB%2CSAAS%3BEAC7B%3BEACA%2CyBAAA%3B%3BAAMF%2CqBAAsB%3BEAEpB%3B%3BAAGF%2CaAAc%2CmBAAkB%3BEAC9B%3B%3BAAGF%2CaAAc%3BEACZ%3B%3BAAGF%3BEAEE%3B%3BAAGF%3BEACE%3BEACA%3BEACA%3B%3BAAGF%2CkBAAmB%3BEACjB%3B%3BAAGF%2CkBAAkB%3BEAChB%3B%3BAAGF%2CUAAW%3BEACT%3B%3BAAGF%3BEACE%2C6BAAA%3B%3BAAGF%2CkBAAkB%2CWAAW%3BEAC3B%2C6BAAA%3BEACA%3B%3BAAGF%2CaAAa%3BEACX%2CcAAA%3B%3BAAGF%3BEACE%3B%3B%3B%3BAAMF%2CeAAgB%3BEACd%3BEACA%3BEACA%3BEACA%3B%3BAAGF%2CgBAAiB%3BEACf%2CcAAA%3BEACA%3B%3BAAGF%3BEACE%3B%3BAAGF%2CeAAgB%2CMAAM%2CKAAI%3BEACxB%3B%3BAAGF%2CeAAgB%3BEACd%3BEACA%3B%3B%3B%3BAAMF%3BEACE%2CsBAAA%3BEACA%3BEACA%3BEACA%3B%3BAAGF%3BEACE%2CsBAAA%3B%3BAAGF%2CoBAAoB%2CSAAS%3BAAAQ%2CoBAAoB%2CSAAS%3BEAChE%2CSAAS%2CEAAT%3BEACA%3BEACA%3BEACA%2CcAAA%3BEACA%3BEACA%2CgCAAA%3B%3B%3B%3BAAOF%2CaAAc%2CiBAAiB%2CMAAK%2CeAAe%2CQAAW%3BEAC5D%2CQAAQ%2CaAAR%3B%3BAAGF%3BEACE%3BEACA%3B%3B%3BAAIF%2CKAAK%2CSAAS%3BEACV%3BEACA%3BEACA%3B%3BAAGJ%2CWAAW%3BEACP%3BEACA%3BEACA%3B%3BAAGJ%2CWAAW%2CIAAO%3BEACd%3BEACA%3BEACA%3B%3BAAGJ%2CSAAS%3BEACL%3B%3B%3BAAIJ%2CeAAe%3BEACb%22%7D */

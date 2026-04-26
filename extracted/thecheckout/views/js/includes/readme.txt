@@ -1,0 +1,1 @@
+This directory is for non-auto loaded JS files, e.g. required by separate payment step page

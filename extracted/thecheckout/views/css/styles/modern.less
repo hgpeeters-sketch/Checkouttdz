@@ -1,0 +1,241 @@
+/*
+   ================================================================================
+   This stylesheet adds platic (with borders and shadows look to blocks
+   It tries to mimic modern fields layout, used by Google and similar big players
+   on their input forms
+   Also it creates field-enter flash effect as fun and engaging factor
+   ================================================================================
+*/
+
+.checkout-block:not(#thecheckout-confirm) .inner-area {
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, .2);
+  border: 1px solid rgba(0, 0, 0, .125);
+  background: white;
+}
+
+/*
+   ================================================================================
+   Input fields styling
+   ================================================================================
+*/
+
+.has-float-label label, .has-float-label span.field-label {
+  position: absolute;
+  left: 0;
+  top: -4px;
+  cursor: text;
+  font-size: 0.85em;
+  //opacity: 1;
+  transition: all .2s;
+  opacity: 0.6;
+}
+
+.has-float-label input:placeholder-shown:not(:focus):not(:-webkit-autofill) ~ span.field-label,
+.has-float-label select:placeholder-shown:not(:focus) ~ span.field-label {
+  font-size: 1.2em;
+  opacity: 0.3;
+  top: .9em;
+  padding-left: 5px;
+}
+
+.has-float-label input.form-control, .has-float-label select.form-control {
+  font-size: 1.2em;
+  padding-top: 1em;
+  margin-bottom: 2px;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  padding: 1em 0.5em 0.2em;
+}
+
+.has-float-label input, .has-float-label select {
+  font-size: inherit;
+  padding-top: 1em;
+  margin-bottom: 2px;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.-error ~ .error-msg {
+  margin-top: -2px;
+}
+
+.business-fields-separator:after,
+.private-fields-separator:after{
+  margin: 15px auto 20px;
+}
+
+/*
+   ================================================================================
+   Transition flash effects on input fields
+   ================================================================================
+*/
+
+.effects-helper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 0 0;
+  color: rgba(199, 152, 157, 0.6);
+  pointer-events: none;
+}
+
+.has-float-label input:focus ~ .effects-helper::after,
+.has-float-label select:focus ~ .effects-helper::after {
+  -webkit-animation: anim-shadow 0.3s forwards;
+  animation: anim-shadow 0.3s forwards;
+}
+
+@-webkit-keyframes anim-shadow {
+  to {
+    box-shadow: 0 0 100px 50px;
+    opacity: 0;
+  }
+}
+
+@keyframes anim-shadow {
+  to {
+    box-shadow: 0 0 100px 50px;
+    opacity: 0;
+  }
+}
+
+/*
+   ================================================================================
+   Shopping cart area
+   ================================================================================
+*/
+
+@cartQuantityInputWidth: 40px;
+@cartQuantityInputHeight: 36px;
+
+input.cart-line-product-quantity {
+  width: @cartQuantityInputWidth;
+  //padding: 3px 22px 3px 3px;
+  height: @cartQuantityInputHeight;
+  text-align: center;
+  margin-right: 20px;
+  border-width: 1px;
+}
+
+a.cart-line-product-quantity-up, a.cart-line-product-quantity-down {
+  display: inline-block;
+  width: 22px;
+  height: @cartQuantityInputHeight/2;
+  position: absolute;
+  color: transparent; /* hide actual label on that anchor */
+  background-size: 70% 70%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: white;
+  right: 0;
+
+  &:hover {
+    box-shadow: 1px 1px 4px 0px grey;
+    background-color: white;
+    background-size: 90% 90%;
+  }
+
+}
+
+.plus-simple {
+  background-image: url("data:image/svg+xml;charset=utf8,%3C?xml version='1.0' encoding='utf-8'?%3E%3Csvg width='1792' height='1792' viewBox='0 0 1792 1792' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M1600 736v192q0 40-28 68t-68 28h-416v416q0 40-28 68t-68 28h-192q-40 0-68-28t-28-68v-416h-416q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h416v-416q0-40 28-68t68-28h192q40 0 68 28t28 68v416h416q40 0 68 28t28 68z'/%3E%3C/svg%3E");
+}
+
+.minus-simple {
+  background-image: url("data:image/svg+xml;charset=utf8,%3C?xml version='1.0' encoding='utf-8'?%3E%3Csvg width='1792' height='1792' viewBox='0 0 1792 1792' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M1600 736v192q0 40-28 68t-68 28h-1216q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h1216q40 0 68 28t28 68z'/%3E%3C/svg%3E");
+}
+
+a.cart-line-product-quantity-up {
+  top: 0px;
+  //left: @cartQuantityInputWidth - 2;
+
+  .plus-simple;
+  border: 1px solid #a39f9f;
+  border-bottom: 1px solid transparent;
+
+}
+
+a.cart-line-product-quantity-down {
+  top: @cartQuantityInputHeight/2;
+  //left: @cartQuantityInputWidth - 2;
+
+  .minus-simple;
+  border: 1px solid #a39f9f;
+}
+
+.qty-box {
+  position: relative;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, .2);
+}
+
+.cart-item:first-child {
+  border-top: 1px solid #c1c1c1;
+}
+
+.cart-item:not(:last-child) {
+  border-bottom: 1px solid #eeeeee;
+}
+
+.cart-item:last-child {
+  border-bottom: 1px solid #c1c1c1;
+}
+
+.product-price-section .product-price, .product-price-section a {
+  color: black;
+}
+
+/*
+   ================================================================================
+   Reassurance area
+   ================================================================================
+*/
+
+.thecheckout-reassurance {
+  text-align: center;
+}
+
+.reassurance-section {
+  margin: 20px auto 30px;
+}
+
+.reassurance-section.security:after, .reassurance-section.delivery:after {
+  content: "";
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 20px;
+  border-bottom: 2px solid #85cad9;
+}
+
+/* Checkboxes */
+
+.page-content .custom-checkbox input[type=checkbox]:checked + span {
+  filter: brightness(0);
+}
+
+.country-call-prefix {
+  font-size: 1.2em;
+  margin-top: ~"calc(1em - 2px)";
+  height: 1.8em;
+  border-radius: unset;
+}
+
+input:placeholder-shown:not(:focus):not(:-webkit-autofill) ~ .country-call-prefix {
+  display: none;
+}
+
+
+/* no-header class treatment */
+.checkout-block.no-header {
+  margin-top: -11px;
+  padding-top: 0;
+  overflow-y: hidden;
+  margin-right: -5px;
+  padding-right: 8px;
+}

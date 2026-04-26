@@ -1,0 +1,51 @@
+/*
+  Sample of styles modification for dark themes
+ */
+
+/*
+
+.block-header {
+    color: white;
+}
+
+.has-float-label.required span.field-label, .need-dni .has-float-label span.field-label, .has-float-label span.field-label {
+    color: white;
+}
+
+.label, label {
+    color: white;
+}
+
+.form-group.missing-street-number label[data-missing-street-nr-notice]:after {
+    color: orangered;
+}
+
+.product-line-body .product-line-info span.label, .value {
+    color: white;
+}
+
+.reassurance-section > .icon::after {
+    display: none;
+}
+
+li.cart-item {
+    list-style: none;
+}
+
+.has-float-label input.form-control, .has-float-label select.form-control.form-control-select {
+    background-color: #272727;
+}
+
+.reassurance-section > .icon {
+    filter: invert(1);
+}
+
+.icon-remove-red-eye {
+    filter: invert(1);
+}
+
+.icon-remove-red-eye:hover {
+    filter: invert(1) opacity(0.7) drop-shadow(0 0px 1px #ff0000);
+}
+
+*/

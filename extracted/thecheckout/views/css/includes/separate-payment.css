@@ -1,0 +1,85 @@
+/**
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Software License Agreement
+ * that is bundled with this package in the file LICENSE.txt.
+ *
+ *  @author    Peter Sliacky (Zelarg)
+ *  @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+
+section#checkout-personal-information-step,
+section#checkout-addresses-step,
+section#checkout-delivery-step,
+#block-reassurance,
+#checkout #checkout-payment-step span.step-number {
+    display: none;
+}
+
+
+body#checkout section.checkout-step.-current .step-title {
+    text-align: center;
+    padding: 10px 0 20px;
+}
+
+div#payment-confirmation .ps-shown-by-js {
+    display: flex;
+    clear: both;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+#separate-payment-order-review {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+#separate-payment-order-review .customer-block-container,
+#separate-payment-order-review #edit-button-block{
+    flex-basis: 100%;
+    text-align: center;
+    padding: 20px 0;
+}
+
+#separate-payment-order-review .address-block-container {
+    flex-basis: 50%;
+}
+
+.address-block-container .address-block,
+.customer-block-container,
+.shipping-method-container
+{
+    padding: 15px;
+    margin: 5px;
+    border: 2px solid #78cfe138;
+}
+
+#separate-payment-order-review #customer-block {
+    font-size: 1.2em;
+}
+
+.address-block .address-block-header,
+#shipping-method .shipping-method-header,
+#delivery-message .delivery-message-header{
+    font-weight: bold;
+    padding: 5px 0;
+    display: block;
+}
+
+.shipping-method-container {
+    flex-basis: 100%;
+}
+
+#shipping-method img {
+    max-height: 60px;
+}
+
+.payment-options #amazonPayCheckoutEmbedded {
+    display: none;
+}
+
+.payment-options.amazon_ongoing_session > div:not(.amazon-visible) {
+    display: none;
+}
