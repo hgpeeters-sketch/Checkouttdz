@@ -8,7 +8,7 @@
  * Copyright (c) 2021-2022
  */
 
-var debug_steps = true
+var debug_steps = false
 
 function validateStep(stepId) {
     // $('.delivery-options input[name^=delivery_option]:checked').length
